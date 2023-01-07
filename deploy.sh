@@ -24,6 +24,8 @@ echo "Deploying..."
 echo "Copy jar..."
 sudo cp target/Clicker-0.0.1-SNAPSHOT.jar ../../bin/clicker.jar
 
+cd /app
+
 echo "Copy service..."
 sudo cp tmp/clicker-main/clicker.service /etc/systemd/system
 rm -rf tmp
