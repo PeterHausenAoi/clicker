@@ -11,8 +11,8 @@ Group=root
 Type=simple
 
 Environment="JAVA_HOME=/usr/bin/java"
-WorkingDirectory=/app/clicker-main
-ExecStart=/bin/java -jar target/Clicker-0.0.1-SNAPSHOT.jar
+WorkingDirectory=/app/bin
+ExecStart=/bin/java -jar clicker.jar
 
 Restart=on-failure
 RestartSec=10

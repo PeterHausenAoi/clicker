@@ -22,9 +22,15 @@ RUN curl -L https://github.com/PeterHausenAoi/clicker/archive/master.tar.gz  --o
 RUN tar -xf master.tar.gz
 
 WORKDIR clicker-main
+
+RUN chmod +x deploy.sh
 RUN cp deploy.sh /app
 
 RUN ls -la /app
+
+WORKDIR /app
+
+RUN rm -rf tmp
 
 #!/bin/bash
 #yum update -y
