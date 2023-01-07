@@ -6,6 +6,7 @@ RUN yum install java-11-amazon-corretto -y
 RUN yum install git -y
 RUN yum install -y which
 RUN yum install -y tar
+RUN yum install -y sudo
 
 RUN javac --version
 RUN java --version
@@ -32,6 +33,9 @@ WORKDIR /app
 
 RUN rm -rf tmp
 
+RUN ./deploy.sh
+
+# v1
 #!/bin/bash
 #yum update -y
 #yum install java-11-amazon-corretto -y
