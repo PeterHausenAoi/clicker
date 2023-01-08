@@ -15,8 +15,10 @@ public class CloseScheduler {
 
     @Scheduled(fixedDelay = 1000)
     public void schedule(){
-        logger.info("Closing expired...");
         var expired = gameService.closeExpired();
-        logger.info("Closed expired: " + expired);
+
+        if (expired > 0) {
+            logger.info("Closed expired: " + expired);
+        }
     }
 }
