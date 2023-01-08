@@ -12,7 +12,7 @@ Type=simple
 
 Environment="JAVA_HOME=/usr/bin/java"
 WorkingDirectory=/app/bin
-ExecStart=/bin/java -jar clicker.jar
+ExecStart=/bin/java -Dspring.profiles.active=production -jar clicker.jar
 
 Restart=on-failure
 RestartSec=10
