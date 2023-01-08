@@ -30,12 +30,16 @@ echo "Copy service..."
 sudo cp tmp/clicker-main/clicker.service /etc/systemd/system
 rm -rf tmp
 
+echo "Setting env vars..."
+
 export AWS_DEFAULT_REGION=eu-central-1
 
 export RDS_ENDPOINT=$(aws ssm get-parameter --name="/clicker/RDS_ENDPOINT" --query "Parameter.Value" --output text)
 export RDS_PORT=$(aws ssm get-parameter --name="/clicker/RDS_PORT" --query "Parameter.Value" --output text)
 export RDS_USER=$(aws ssm get-parameter --name="/clicker/RDS_USER" --query "Parameter.Value" --output text)
 export RDS_PASSWORD=$(aws ssm get-parameter --name="/clicker/RDS_PASSWORD" --query "Parameter.Value" --output text)
+
+echo "Env vars set."
 
 echo "Start service..."
 sudo systemctl start clicker.service
