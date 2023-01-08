@@ -10,8 +10,7 @@ Group=root
 
 Type=simple
 
-Environment="JAVA_HOME=/usr/bin/java"
-Environment="RDS_ENDPOINT=clicker-database-1.cte8efhdk1zm.eu-central-1.rds.amazonaws.com"
+EnvironmentFile="/etc/systemd/system/clicker.conf"
 WorkingDirectory=/app/bin
 ExecStart=/bin/java -Dspring.profiles.active=production -jar clicker.jar
 
