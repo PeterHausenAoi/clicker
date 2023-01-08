@@ -1,4 +1,4 @@
-package com.PeterHausen.Clicker.models;
+package com.PeterHausen.Clicker.models.rest;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,4 +11,6 @@ import java.util.UUID;
 @Builder
 public class Click {
     UUID gameId;
+    Long id;
+    String timestamp;
 }
