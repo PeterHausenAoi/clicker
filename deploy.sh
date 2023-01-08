@@ -44,6 +44,7 @@ echo "Env vars set."
 echo "Start service..."
 sudo systemctl start clicker.service
 sudo systemctl enable clicker.service
+sudo systemctl daemon-reload
 sudo systemctl status clicker.service
 
 echo "Deployed"
