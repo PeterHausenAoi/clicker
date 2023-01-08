@@ -10,7 +10,13 @@ Group=root
 
 Type=simple
 
-EnvironmentFile="/etc/systemd/system/clicker.conf"
+Environment="RDS_ENDPOINT=RDS_ENDPOINT_PLACEHOLDER"
+Environment="RDS_PORT=RDS_PORT_PLACEHOLDER"
+Environment="RDS_USER=RDS_USER_PLACEHOLDER"
+Environment="RDS_PASSWORD=RDS_PASSWORD_PLACEHOLDER"
+Environment="AWS_DEFAULT_REGION=AWS_DEFAULT_REGION_PLACEHOLDER"
+Environment="JAVA_HOME=/usr/bin/java"
+
 WorkingDirectory=/app/bin
 ExecStart=/bin/java -Dspring.profiles.active=production -jar clicker.jar
 
