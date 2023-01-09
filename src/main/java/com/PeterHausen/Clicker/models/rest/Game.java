@@ -24,6 +24,7 @@ public class Game {
 
     boolean closed;
 
+    String hostname;
 
     public Game(String playerName) {
         this.playerName = playerName;
