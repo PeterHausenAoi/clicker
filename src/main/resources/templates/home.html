@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <style>
       html, body {
+      touch-action: manipulation;
       min-height: 100%;
       }
       body, div, form, input, select, textarea, label {
@@ -85,6 +86,7 @@
       margin: 10px 0;
       margin-left: 200px;
       margin-right: 200px;
+      margin-bottom: 200px;
       }
       .item span {
       color: red;
@@ -288,11 +290,11 @@
               dataType:"json",
               success: function(data){
                     console.log(data);
-                    setHeaderCounter(data.count + " - " + data.hostname);
+                    setHeaderCounter(data.count);
 
                     if(data.closed){
                         window.game.state='closed';
-                        setHeaderCounter("Finished at: " + data.count + " - " + data.hostname);
+                        setHeaderCounter("Finished at: " + data.count);
                         $('#resetButton').prop('disabled', false);
                         $('#clickButton').prop('disabled', true);
                         updateTopGames();
