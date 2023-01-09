@@ -17,6 +17,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -68,7 +69,26 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public List<Game> getTopGames() {
-        return null;
+        var gameEntities = gameRepository.getTop10();
+
+        var games = new ArrayList<Game>();
+
+        gameEntities.forEach(gameEntity -> {
+            var builder = Game.builder();
+
+            Date timestamp = new Date(gameEntity.getCreatedAt());
+
+            builder.id(gameEntity.getId())
+                    .playerName(gameEntity.getPlayerName())
+                    .count(gameEntity.getClicks().size())
+                    .closed(gameEntity.isClosed())
+                    .hostname(getHostname())
+                    .createdAt(sdf.format(timestamp));
+
+            games.add(builder.build());
+        });
+
+        return games;
     }
 
     @Override

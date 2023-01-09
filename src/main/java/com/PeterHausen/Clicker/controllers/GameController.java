@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -30,6 +31,12 @@ public class GameController {
         }
 
         return gameService.createGame(game.getPlayerName());
+    }
+
+    @GetMapping(value = "/top", produces = "application/json")
+    public List<Game> getTopGames() throws NotFoundException {
+        logger.info("game getTopGames");
+        return gameService.getTopGames();
     }
 
     @GetMapping(value = "/{gameId}", produces = "application/json")

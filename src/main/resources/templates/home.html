@@ -40,6 +40,7 @@
       box-shadow: 0 0 8px  #cc7a00;
       }
       .banner {
+      border-radius: 25px;
       position: relative;
       height: 150px;
       background-size: cover;
@@ -82,8 +83,8 @@
       .item {
       position: relative;
       margin: 10px 0;
-      margin-left: 100px;
-      margin-right: 100px;
+      margin-left: 200px;
+      margin-right: 200px;
       }
       .item span {
       color: red;
@@ -166,14 +167,37 @@
       text-align: center;
 
       }
+
+
+
+      table {
+          width: 100%;
+          font-size: 20px;
+        }
+
+      th {
+          width: 33%;
+          padding: 5px;
+          border: 1px solid #282A35;
+          border-collapse: collapse;
+      }
+
+      td {
+          width: 33%;
+          padding: 5px;
+          border: 1px solid #282A35;
+          border-collapse: collapse;
+      }
+
       button {
+      border-radius: 25px;
       width: 250px;
       height: 250px;
       padding: 10px;
       border: none;
       border-radius: 5px;
       background: #cc7a00;
-      font-size: 16px;
+      font-size: 40px;
       color: #fff;
       cursor: pointer;
       }
@@ -198,9 +222,36 @@
       }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script>
+</head>
+<script>
         console.log(window.playerNames);
 
+        function updateTopGamesView(data){
+            var view = '<tr><th>Player</th><th>Count</th><th>Created at</th></tr>';
+
+            for (let index = 0; index < data.length; ++index) {
+                const element = data[index];
+                view += '<tr>'
+                          + '<td>' + element.playerName + '</td>'
+                          + '<td>' + element.count + '</td>'
+                          + '<td>' + element.createdAt + '</td>'
+                       + '</tr>'
+            }
+
+            $("#topTable").html(view);
+        }
+
+        function updateTopGames(){
+            $.ajax({
+                  url: "/api/game/top",
+                  type:"GET",
+                  contentType:"application/json; charset=utf-8",
+                  dataType:"json",
+                  success: function(data){
+                        updateTopGamesView(data);
+                  }
+                });
+        }
 
         function startGame(){
                 $('#clickButton').prop('disabled', true);
@@ -221,6 +272,7 @@
                         $('#resetButton').prop('disabled', true);
                         window.game.state='in_progress';
                         window.game.id=data.id;
+                        $('#clickButton').html('Click');
                   }
                 });
         }
@@ -243,6 +295,7 @@
                         setHeaderCounter("Finished at: " + data.count + " - " + data.hostname);
                         $('#resetButton').prop('disabled', false);
                         $('#clickButton').prop('disabled', true);
+                        updateTopGames();
                     }
 
               }
@@ -277,20 +330,19 @@
 
             $('#resetButton').prop('disabled', true);
             $('#clickButton').prop('disabled', false);
+            $('#clickButton').html('Start');
 
             setHeaderCounter('Click Yo');
-
             console.log(window.game);
         }
 
         reset();
+        updateTopGames();
         console.log(window.game);
 
     </script>
-</head>
 <body>
 <div class="testbox">
-
     <div class="formd">
         <div class="banner">
             <h1 id="headerCounter">Click Yo</h1>
@@ -299,12 +351,20 @@
             <input id="name" type="text" name="name" value="Player"/>
         </div>
         <div class="btn-block" >
-            <button id="clickButton" type="button" style="background: #00FF00" onclick="clickGame()">Click</button>
+            <button id="clickButton" type="button" style="background: #00FF00" onclick="clickGame()">Start</button>
         </div>
         <div class="btn-block" >
             <button id="resetButton" type="button" style="background: #FF0000" onclick="reset()">Reset</button>
         </div>
     </div>
 </div>
+<div class="testbox">
+    <div class="formd">
+        <table id="topTable">
+
+        </table>
+    </div>
+</div>
+
 </body>
 </html>
