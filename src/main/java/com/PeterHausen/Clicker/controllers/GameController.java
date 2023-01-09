@@ -4,7 +4,6 @@ import com.PeterHausen.Clicker.models.exceptions.NotFoundException;
 import com.PeterHausen.Clicker.models.exceptions.ValidationException;
 import com.PeterHausen.Clicker.models.rest.Click;
 import com.PeterHausen.Clicker.models.rest.Game;
-import com.PeterHausen.Clicker.schedulers.CloseScheduler;
 import com.PeterHausen.Clicker.services.GameService;
 import lombok.AllArgsConstructor;
 import org.apache.logging.log4j.util.Strings;
